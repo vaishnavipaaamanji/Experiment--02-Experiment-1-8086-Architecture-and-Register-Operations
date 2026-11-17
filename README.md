@@ -165,7 +165,27 @@ Write an 8086 assembly language program to exchange the contents of two
 5.  Stop the program.
 
 ### Assembly Program
+.MODEL SMALL
+.STACK 100H
 
+.DATA
+    VALUE1 DW 1111H
+    VALUE2 DW 2222H
+
+.CODE
+MAIN PROC
+    MOV AX, @DATA
+    MOV DS, AX
+
+    MOV AX, VALUE1      ; AX = 1111H
+    MOV BX, VALUE2      ; BX = 2222H
+    MOV VALUE1, BX      ; VALUE1 = 2222H
+    MOV VALUE2, AX      ; VALUE2 = 1111H
+
+    MOV AH, 4CH
+    INT 21H
+MAIN ENDP
+END MAIN
  
 
 ### Expected Result
@@ -191,6 +211,9 @@ Write an 8086 assembly language program to exchange the contents of two
 7.  Record the observed results and compare them with the expected
     results.
 ## Screenshot of the results 
+<img width="1600" height="831" alt="image" src="https://github.com/user-attachments/assets/767aed0d-0010-4fbe-b7bd-2d17e43cb63a" />
+<img width="1600" height="836" alt="image" src="https://github.com/user-attachments/assets/68b99734-2f31-421f-b953-28e3e700164e" />
+<img width="1600" height="833" alt="image" src="https://github.com/user-attachments/assets/07e45678-c9bd-43c4-a8ee-53fc48c808d3" />
 
 
 
@@ -203,14 +226,14 @@ storage and the exchange of two 16-bit memory values.
 
 ## Viva Voce Questions
 
-1.  What is the function of the BIU in the 8086?
-2.  What is the role of the EU?
-3.  Why does the 8086 use a 6-byte instruction queue?
-4.  What is the maximum physical memory address space of the 8086?
-5.  What is the difference between a register and a memory variable?
-6.  Does the `MOV` instruction change the source operand?
-7.  Why are registers used when exchanging two memory values?
-8.  What is the purpose of the DS segment register?
+1.  What is the function of the BIU in the 8086?1. BIU (Bus Interface Unit): Fetches instructions, accesses memory and handles data transfer.
+2.  What is the role of the EU?    EU (Execution Unit): Decodes and executes instructions.
+3.  Why does the 8086 use a 6-byte instruction queue?    6-Byte Instruction Queue: Stores prefetched instructions to improve execution speed.
+4.  What is the maximum physical memory address space of the 8086?    Maximum Physical Memory: 1 MB (2²⁰ bytes).
+5.  What is the difference between a register and a memory variable?    Register vs Memory Variable: A register is inside the CPU, whereas a memory variable is stored in RAM.
+6.  Does the `MOV` instruction change the source operand?    MOV Instruction: No, MOV copies data without changing the source operand.
+7.  Why are registers used when exchanging two memory values?    Registers for Exchanging Memory Values: Registers act as temporary storage because memory-to-memory exchange is not directly supported.
+8.  What is the purpose of the DS segment register?    DS Segment Register: Stores the starting address of the Data Segment.
 
  
 ` 
